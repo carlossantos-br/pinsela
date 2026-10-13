@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# pinsela_visual_diff — wrapper that prefers the Pinsela API venv (with Pillow)
+# and falls back to system python3.
+set -euo pipefail
+
+HERE="$(cd "$(dirname "$0")" && pwd)"
+SCRIPT="$HERE/pinsela_visual_diff.py"
+API_VENV_PY="$HERE/../../apps/api/.venv/bin/python"
+
+if [ -x "$API_VENV_PY" ]; then
+  exec "$API_VENV_PY" "$SCRIPT" "$@"
+else
+  exec python3 "$SCRIPT" "$@"
+fi

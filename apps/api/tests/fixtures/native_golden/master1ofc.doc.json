@@ -1,0 +1,126 @@
+{
+  "version": 1,
+  "template_kind": "master1ofc",
+  "canvas": { "width": 1080, "height": 1080, "background": "#f7f1e8" },
+  "root_id": "root",
+  "nodes": [
+    {
+      "id": "root",
+      "parent_id": null,
+      "children_ids": ["banner", "title", "subtitle", "cta"],
+      "name": "ROOT",
+      "kind": "frame",
+      "geometry": { "x": 0, "y": 0, "width": 1080, "height": 1080, "rotation": 0, "corner_radius": 0, "clip": false, "z_index": 0 },
+      "layout": { "direction": "none", "gap": 0, "padding_top": 0, "padding_right": 0, "padding_bottom": 0, "padding_left": 0, "align_main": "start", "align_cross": "start", "sizing_mode": "fixed", "wrap": false },
+      "constraints": { "x": "min", "y": "min", "width": "fixed", "height": "fixed" },
+      "style": { "visible": true, "locked": false, "opacity": 1, "blend_mode": "normal", "fill": "#f7f1e8", "stroke": null, "effects": [], "image_fit": "fill", "image_crop": null, "mask": false },
+      "text": null,
+      "text_style": { "family": "Inter", "postscript": "Inter-Regular", "style": "Regular", "size": 42, "line_height": 110, "line_height_unit": "percent", "letter_spacing": 0, "text_align": "left", "vertical_align": "top" },
+      "text_runs": [],
+      "text_path": null,
+      "image_src": null,
+      "editable": false,
+      "component_instance": null
+    },
+    {
+      "id": "banner",
+      "parent_id": "root",
+      "children_ids": [],
+      "name": "BANNER",
+      "kind": "rect",
+      "geometry": { "x": 90, "y": 120, "width": 900, "height": 420, "rotation": 0, "corner_radius": 42, "clip": false, "z_index": 1 },
+      "layout": { "direction": "none", "gap": 0, "padding_top": 0, "padding_right": 0, "padding_bottom": 0, "padding_left": 0, "align_main": "start", "align_cross": "start", "sizing_mode": "fixed", "wrap": false },
+      "constraints": { "x": "min", "y": "min", "width": "fixed", "height": "fixed" },
+      "style": { "visible": true, "locked": false, "opacity": 1, "blend_mode": "normal", "fill": "#d9c1a7", "stroke": null, "effects": [], "image_fit": "fill", "image_crop": null, "mask": false },
+      "text": null,
+      "text_style": { "family": "Inter", "postscript": "Inter-Regular", "style": "Regular", "size": 42, "line_height": 110, "line_height_unit": "percent", "letter_spacing": 0, "text_align": "left", "vertical_align": "top" },
+      "text_runs": [],
+      "text_path": null,
+      "image_src": null,
+      "editable": false,
+      "component_instance": null
+    },
+    {
+      "id": "title",
+      "parent_id": "root",
+      "children_ids": [],
+      "name": "TITLE",
+      "kind": "text",
+      "geometry": { "x": 120, "y": 600, "width": 840, "height": 120, "rotation": 0, "corner_radius": 0, "clip": false, "z_index": 2 },
+      "layout": { "direction": "none", "gap": 0, "padding_top": 0, "padding_right": 0, "padding_bottom": 0, "padding_left": 0, "align_main": "start", "align_cross": "start", "sizing_mode": "fixed", "wrap": false },
+      "constraints": { "x": "min", "y": "min", "width": "fixed", "height": "fixed" },
+      "style": { "visible": true, "locked": false, "opacity": 1, "blend_mode": "normal", "fill": "#1d1b18", "stroke": null, "effects": [], "image_fit": "fill", "image_crop": null, "mask": false },
+      "text": "MASTER OFC",
+      "text_style": { "family": "Inter", "postscript": "Inter-Bold", "style": "Bold", "size": 76, "line_height": 96, "line_height_unit": "percent", "letter_spacing": 1, "text_align": "center", "vertical_align": "top", "color": "#1d1b18" },
+      "text_runs": [],
+      "text_path": null,
+      "image_src": null,
+      "editable": true,
+      "component_instance": null
+    },
+    {
+      "id": "subtitle",
+      "parent_id": "root",
+      "children_ids": [],
+      "name": "SUBTITLE",
+      "kind": "text",
+      "geometry": { "x": 140, "y": 716, "width": 800, "height": 84, "rotation": 0, "corner_radius": 0, "clip": false, "z_index": 3 },
+      "layout": { "direction": "none", "gap": 0, "padding_top": 0, "padding_right": 0, "padding_bottom": 0, "padding_left": 0, "align_main": "start", "align_cross": "start", "sizing_mode": "fixed", "wrap": false },
+      "constraints": { "x": "min", "y": "min", "width": "fixed", "height": "fixed" },
+      "style": { "visible": true, "locked": false, "opacity": 1, "blend_mode": "normal", "fill": "#3b322a", "stroke": null, "effects": [], "image_fit": "fill", "image_crop": null, "mask": false },
+      "text": "Native render validated by golden",
+      "text_style": { "family": "Inter", "postscript": "Inter-Regular", "style": "Regular", "size": 36, "line_height": 110, "line_height_unit": "percent", "letter_spacing": 0, "text_align": "center", "vertical_align": "top", "color": "#3b322a" },
+      "text_runs": [],
+      "text_path": null,
+      "image_src": null,
+      "editable": true,
+      "component_instance": null
+    },
+    {
+      "id": "cta",
+      "parent_id": "root",
+      "children_ids": [],
+      "name": "CTA",
+      "kind": "rect",
+      "geometry": { "x": 320, "y": 874, "width": 440, "height": 110, "rotation": 0, "corner_radius": 55, "clip": false, "z_index": 4 },
+      "layout": { "direction": "none", "gap": 0, "padding_top": 0, "padding_right": 0, "padding_bottom": 0, "padding_left": 0, "align_main": "start", "align_cross": "start", "sizing_mode": "fixed", "wrap": false },
+      "constraints": { "x": "min", "y": "min", "width": "fixed", "height": "fixed" },
+      "style": { "visible": true, "locked": false, "opacity": 1, "blend_mode": "normal", "fill": "#1f1d1a", "stroke": null, "effects": [], "image_fit": "fill", "image_crop": null, "mask": false },
+      "text": null,
+      "text_style": { "family": "Inter", "postscript": "Inter-Regular", "style": "Regular", "size": 42, "line_height": 110, "line_height_unit": "percent", "letter_spacing": 0, "text_align": "left", "vertical_align": "top" },
+      "text_runs": [],
+      "text_path": null,
+      "image_src": null,
+      "editable": false,
+      "component_instance": null
+    }
+  ],
+  "bindings": {
+    "text": {
+      "title1": {
+        "node_id": "title",
+        "required": true,
+        "max_length": 48,
+        "fit": { "start_size": 76, "min_size": 54, "max_lines": 2, "min_lines": 1, "truncate_mode": "none" },
+        "font": { "family": "Inter", "style": "Bold", "postscript": "Inter-Bold", "size": 76, "line_height": 96, "line_height_unit": "percent", "letter_spacing": 1, "text_align": "center", "vertical_align": "top" },
+        "label": "Main title"
+      },
+      "body1": {
+        "node_id": "subtitle",
+        "required": true,
+        "max_length": 80,
+        "fit": { "start_size": 36, "min_size": 24, "max_lines": 2, "min_lines": 1, "truncate_mode": "none" },
+        "font": { "family": "Inter", "style": "Regular", "postscript": "Inter-Regular", "size": 36, "line_height": 110, "line_height_unit": "percent", "letter_spacing": 0, "text_align": "center", "vertical_align": "top" },
+        "label": "Subtitle"
+      }
+    },
+    "images_single": {},
+    "images_array": {},
+    "product_frames": null
+  },
+  "dynamic_rules": [],
+  "metadata": {
+    "source": "golden-fixture",
+    "components": { "definitions": [] }
+  }
+}

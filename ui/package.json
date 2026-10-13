@@ -1,0 +1,34 @@
+{
+  "name": "pinsela-ui",
+  "private": true,
+  "license": "MIT",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -p tsconfig.app.json --noEmit && vite build",
+    "preview": "vite preview",
+    "test:pinsela-core": "tsx src/pinsela/core/__tests__/run.ts"
+  },
+  "dependencies": {
+    "@huggingface/transformers": "4.2.0",
+    "@tanstack/react-query": "^5.90.21",
+    "fflate": "0.8.2",
+    "konva": "^10.2.0",
+    "lucide-react": "^0.575.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-konva": "^18.2.13",
+    "react-router-dom": "^6.28.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.4",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
+    "playwright-core": "^1.58.2",
+    "tsx": "^4.20.5",
+    "typescript": "5.4.5",
+    "vite": "^6.0.11"
+  }
+}

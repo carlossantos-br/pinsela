@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    "moduleResolution": "Bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    "strict": true,
+    "types": ["vite/client"]
+  },
+  "include": ["src"],
+  "exclude": [
+    "src/pinsela/__tests__",
+    "src/pinsela/core/__tests__",
+    "src/pinsela/engine/core/__tests__",
+    "src/pinsela/ui/darkglass/canvas/__tests__",
+    "src/pinsela/platform/live/__tests__",
+    "src/**/__tests__"
+  ]
+}

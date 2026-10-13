@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pinsela Preview — Hot Reload</title>
+  <style>
+    :root {
+      --bg: #e6ded4;
+      --bg-deeper: #d8cebf;
+      --ink: #1c1a17;
+      --ink-soft: #4a4439;
+      --accent: #9b7b3f;
+      --ok: #2f8f4a;
+      --warn: #c75c3c;
+      --card: #f5f0e7;
+      --card-border: #c9bea9;
+      --shadow: 0 18px 40px -22px rgba(28, 26, 23, 0.35);
+      --radius: 14px;
+      --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+      --sans: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(8px);
+      background: rgba(230, 222, 212, 0.85);
+      border-bottom: 1px solid var(--card-border);
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+    header h1 .muted { color: var(--ink-soft); font-weight: 400; }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 11px 5px 9px;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 999px;
+      font-size: 12px;
+      color: var(--ink-soft);
+    }
+    .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--warn);
+      box-shadow: 0 0 0 0 rgba(0,0,0,0);
+      transition: background 200ms;
+    }
+    .dot.ok { background: var(--ok); animation: pulse 2.4s ease-in-out infinite; }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(47,143,74,0.4); }
+      50% { box-shadow: 0 0 0 6px rgba(47,143,74,0); }
+    }
+
+    header .spacer { flex: 1; }
+    header button, header a.btn {
+      font: inherit;
+      font-size: 12px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--card-border);
+      background: var(--card);
+      color: var(--ink);
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 150ms, transform 150ms;
+    }
+    header button:hover, header a.btn:hover { background: #ebe5d9; }
+    header button:active, header a.btn:active { transform: translateY(1px); }
+
+    main {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 24px;
+      padding: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    aside.history {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    aside.history h2 {
+      margin: 0 0 4px 2px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ink-soft);
+    }
+    aside.history .empty {
+      font-size: 12px;
+      color: var(--ink-soft);
+      padding: 12px;
+      border: 1px dashed var(--card-border);
+      border-radius: 10px;
+      text-align: center;
+    }
+    .thumb {
+      display: flex; gap: 10px; align-items: center;
+      padding: 6px;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 120ms, border-color 120ms;
+      text-align: left;
+      font: inherit;
+      width: 100%;
+    }
+    .thumb:hover { background: #ebe5d9; }
+    .thumb.active { border-color: var(--accent); background: #ebe5d9; }
+    .thumb img {
+      width: 44px; height: 44px; object-fit: cover;
+      border-radius: 6px; background: var(--bg-deeper);
+      flex-shrink: 0;
+    }
+    .thumb .meta {
+      font-size: 11px;
+      color: var(--ink-soft);
+      line-height: 1.35;
+      overflow: hidden;
+    }
+    .thumb .meta .sha {
+      font-family: var(--mono);
+      color: var(--ink);
+      display: block;
+    }
+
+    section.viewer {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-width: 0;
+    }
+    .stage {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 360px;
+    }
+    .stage .placeholder {
+      color: var(--ink-soft);
+      font-size: 13px;
+      text-align: center;
+      max-width: 320px;
+      line-height: 1.5;
+    }
+    .stage .placeholder code {
+      font-family: var(--mono);
+      font-size: 12px;
+      background: var(--bg-deeper);
+      padding: 1px 6px;
+      border-radius: 4px;
+    }
+    .stage img {
+      max-width: 540px;
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      opacity: 0;
+      transform: scale(0.985);
+      transition: opacity 220ms ease, transform 220ms ease;
+      box-shadow: 0 10px 24px -16px rgba(0,0,0,0.35);
+    }
+    .stage img.show { opacity: 1; transform: scale(1); }
+
+    .meta-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      align-items: center;
+      font-size: 12px;
+      color: var(--ink-soft);
+      padding: 0 4px;
+    }
+    .meta-bar .kv { display: inline-flex; gap: 5px; align-items: baseline; }
+    .meta-bar .kv b { color: var(--ink); font-weight: 600; }
+    .meta-bar .kv .mono { font-family: var(--mono); color: var(--ink); }
+    .meta-bar .spacer { flex: 1; }
+
+    .toast {
+      position: fixed;
+      bottom: 24px; left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--ink);
+      color: var(--bg);
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 12px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 200ms, transform 200ms;
+      z-index: 50;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    @media (max-width: 720px) {
+      main { grid-template-columns: 1fr; }
+      aside.history { order: 2; }
+      .stage { padding: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Pinsela Preview <span class="muted">— Hot Reload Active</span></h1>
+    <span class="status-pill" id="statusPill">
+      <span class="dot" id="statusDot"></span>
+      <span id="statusText">connecting...</span>
+    </span>
+    <span class="spacer"></span>
+    <button id="reloadBtn" title="Reload latest (R)">Reload</button>
+    <a class="btn" id="editorBtn" href="http://localhost:5173/project/proj_a35674dd-b32" target="_blank" rel="noopener">Open in editor</a>
+    <button id="downloadBtn" title="Download PNG">Download</button>
+  </header>
+
+  <main>
+    <aside class="history" aria-label="Render history">
+      <h2>History</h2>
+      <div id="historyList"></div>
+    </aside>
+
+    <section class="viewer">
+      <div class="stage" id="stage">
+        <div class="placeholder" id="placeholder">
+          Connect a watcher with
+          <br>
+          <code>python3 scripts/agent-tools/pinsela_watch.py &lt;doc.json&gt;</code>
+          <br>
+          or POST to <code>/api/agent/preview/render-and-broadcast</code>.
+        </div>
+      </div>
+      <div class="meta-bar" id="metaBar" style="visibility:hidden">
+        <span class="kv"><b id="metaDims">-</b></span>
+        <span class="kv">sha: <span class="mono" id="metaSha">-</span></span>
+        <span class="kv">bytes: <b id="metaBytes">-</b></span>
+        <span class="kv">render: <b id="metaDur">-</b>ms</span>
+        <span class="kv" id="metaLabelWrap" style="display:none">label: <b id="metaLabel">-</b></span>
+        <span class="spacer"></span>
+        <span class="kv">at <span class="mono" id="metaTime">-</span></span>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast">ok</div>
+
+  <script>
+  (() => {
+    const stage = document.getElementById('stage');
+    const statusDot = document.getElementById('statusDot');
+    const statusText = document.getElementById('statusText');
+    const historyList = document.getElementById('historyList');
+    const metaBar = document.getElementById('metaBar');
+    const metaDims = document.getElementById('metaDims');
+    const metaSha = document.getElementById('metaSha');
+    const metaBytes = document.getElementById('metaBytes');
+    const metaDur = document.getElementById('metaDur');
+    const metaTime = document.getElementById('metaTime');
+    const metaLabel = document.getElementById('metaLabel');
+    const metaLabelWrap = document.getElementById('metaLabelWrap');
+    const toast = document.getElementById('toast');
+
+    const HISTORY_MAX = 10;
+    const history = [];   // newest first
+    let currentIndex = 0; // 0 means latest
+
+    function showToast(msg) {
+      toast.textContent = msg;
+      toast.classList.add('show');
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(() => toast.classList.remove('show'), 1400);
+    }
+
+    function setStatus(state, text) {
+      statusDot.classList.toggle('ok', state === 'ok');
+      statusText.textContent = text;
+    }
+
+    function fmtTime(ts) {
+      if (!ts) return '-';
+      const d = new Date(ts * 1000);
+      return d.toLocaleTimeString();
+    }
+
+    function clearChildren(node) {
+      while (node.firstChild) node.removeChild(node.firstChild);
+    }
+
+    function renderImage(record) {
+      // Build fresh <img> each time so transition restarts.
+      clearChildren(stage);
+      const img = document.createElement('img');
+      img.alt = record.sha8 || 'render';
+      img.src = record.url + '?t=' + (record.ts || Date.now());
+      img.addEventListener('load', () => {
+        requestAnimationFrame(() => img.classList.add('show'));
+      });
+      stage.appendChild(img);
+
+      metaBar.style.visibility = 'visible';
+      metaDims.textContent = String(record.width) + 'x' + String(record.height);
+      metaSha.textContent = String(record.sha256 || '').slice(0, 12);
+      metaBytes.textContent = Number(record.bytes || 0).toLocaleString();
+      metaDur.textContent = (record.duration_ms != null) ? String(record.duration_ms) : '-';
+      metaTime.textContent = fmtTime(record.ts);
+      if (record.label) {
+        metaLabel.textContent = String(record.label);
+        metaLabelWrap.style.display = '';
+      } else {
+        metaLabelWrap.style.display = 'none';
+      }
+    }
+
+    function buildEmptyHistory() {
+      const empty = document.createElement('div');
+      empty.className = 'empty';
+      empty.textContent = 'Waiting for the first render...';
+      return empty;
+    }
+
+    function buildThumb(rec, idx) {
+      const btn = document.createElement('button');
+      btn.className = 'thumb' + (idx === currentIndex ? ' active' : '');
+      btn.type = 'button';
+      btn.title = String(rec.sha256 || '');
+
+      const img = document.createElement('img');
+      img.src = rec.url;
+      img.alt = '';
+
+      const meta = document.createElement('span');
+      meta.className = 'meta';
+
+      const sha = document.createElement('span');
+      sha.className = 'sha';
+      sha.textContent = String(rec.sha256 || '').slice(0, 8);
+
+      const sub = document.createTextNode(
+        fmtTime(rec.ts) + ' · ' + String(rec.width) + 'x' + String(rec.height)
+      );
+
+      meta.appendChild(sha);
+      meta.appendChild(sub);
+      btn.appendChild(img);
+      btn.appendChild(meta);
+      btn.addEventListener('click', () => {
+        currentIndex = idx;
+        renderImage(history[idx]);
+        renderHistory();
+      });
+      return btn;
+    }
+
+    function renderHistory() {
+      clearChildren(historyList);
+      if (!history.length) {
+        historyList.appendChild(buildEmptyHistory());
+        return;
+      }
+      history.forEach((rec, idx) => {
+        historyList.appendChild(buildThumb(rec, idx));
+      });
+    }
+
+    function onRender(record) {
+      if (history[0] && history[0].sha256 === record.sha256) return;
+      history.unshift(record);
+      if (history.length > HISTORY_MAX) history.length = HISTORY_MAX;
+      currentIndex = 0;
+      renderImage(record);
+      renderHistory();
+    }
+
+    // Initial empty state.
+    renderHistory();
+
+    // ----- SSE -----
+    let es = null;
+    let retryTimer = null;
+    function connect() {
+      setStatus('warn', 'connecting...');
+      es = new EventSource('/api/agent/preview/stream');
+      es.addEventListener('open', () => setStatus('ok', 'live'));
+      es.addEventListener('status', (ev) => {
+        try {
+          const data = JSON.parse(ev.data);
+          const n = data.connected_clients || 1;
+          setStatus('ok', 'live · ' + n + ' client' + (n > 1 ? 's' : ''));
+        } catch (e) { /* noop */ }
+      });
+      es.addEventListener('render', (ev) => {
+        try { onRender(JSON.parse(ev.data)); } catch (e) { console.warn(e); }
+      });
+      es.addEventListener('error', () => {
+        setStatus('warn', 'disconnected · retrying...');
+        if (es) { es.close(); es = null; }
+        clearTimeout(retryTimer);
+        retryTimer = setTimeout(connect, 3000);
+      });
+    }
+    connect();
+
+    // ----- Controls -----
+    document.getElementById('reloadBtn').addEventListener('click', async () => {
+      try {
+        const r = await fetch('/api/agent/preview/latest');
+        const j = await r.json();
+        if (j && j.latest) {
+          onRender(j.latest);
+          showToast('latest reloaded');
+        } else {
+          showToast('no render yet');
+        }
+      } catch (e) { showToast('reload failed'); }
+    });
+
+    document.getElementById('downloadBtn').addEventListener('click', () => {
+      const rec = history[currentIndex];
+      if (!rec) { showToast('nothing to download'); return; }
+      const a = document.createElement('a');
+      a.href = rec.url;
+      a.download = (rec.sha8 || 'pinsela') + '.png';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    });
+
+    // ----- Keyboard -----
+    document.addEventListener('keydown', (ev) => {
+      if (ev.target && ['INPUT','TEXTAREA'].includes(ev.target.tagName)) return;
+      if (ev.key === 'r' || ev.key === 'R') {
+        document.getElementById('reloadBtn').click();
+      } else if (ev.key === 'ArrowDown' || ev.key === 'ArrowRight') {
+        if (history.length === 0) return;
+        currentIndex = Math.min(currentIndex + 1, history.length - 1);
+        renderImage(history[currentIndex]);
+        renderHistory();
+      } else if (ev.key === 'ArrowUp' || ev.key === 'ArrowLeft') {
+        if (history.length === 0) return;
+        currentIndex = Math.max(currentIndex - 1, 0);
+        renderImage(history[currentIndex]);
+        renderHistory();
+      }
+    });
+  })();
+  </script>
+</body>
+</html>

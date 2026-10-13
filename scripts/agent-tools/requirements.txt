@@ -1,0 +1,10 @@
+# Hard requirements: only stdlib.
+# Optional:
+#   httpx  -> for the `render` command (POSTs to local Pinsela API)
+#   Pillow -> for `extract-palette` only
+#
+# All commands except `render` and `extract-palette` work with stdlib alone.
+# If the Pinsela API's virtualenv exists at apps/api/.venv it will be used
+# automatically (gives access to pydantic-based full validator, httpx, Pillow).
+httpx>=0.27
+Pillow>=10.0

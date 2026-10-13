@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "template_kind": "folder",
+  "canvas": { "width": 1080, "height": 1920, "background": "#efe3d6" },
+  "root_id": "root",
+  "nodes": [
+    {
+      "id": "root",
+      "parent_id": null,
+      "children_ids": ["title_1", "card_1", "card_2", "divider_1"],
+      "name": "ROOT",
+      "kind": "frame",
+      "geometry": { "x": 0, "y": 0, "width": 1080, "height": 1920, "rotation": 0, "corner_radius": 0, "clip": false, "z_index": 0 },
+      "layout": { "direction": "none", "gap": 0, "padding_top": 0, "padding_right": 0, "padding_bottom": 0, "padding_left": 0, "align_main": "start", "align_cross": "start", "sizing_mode": "fixed", "wrap": false },
+      "constraints": { "x": "min", "y": "min", "width": "fixed", "height": "fixed" },
+      "style": { "visible": true, "locked": false, "opacity": 1, "blend_mode": "normal", "fill": "#efe3d6", "stroke": null, "effects": [], "image_fit": "fill", "image_crop": null, "mask": false },
+      "text": null,
+      "text_style": { "family": "Inter", "postscript": "Inter-Regular", "style": "Regular", "size": 42, "line_height": 110, "line_height_unit": "percent", "letter_spacing": 0, "text_align": "left", "vertical_align": "top" },
+      "text_runs": [],
+      "text_path": null,
+      "image_src": null,
+      "editable": false,
+      "component_instance": null
+    },
+    {
+      "id": "title_1",
+      "parent_id": "root",
+      "children_ids": [],
+      "name": "TITLE1",
+      "kind": "text",
+      "geometry": { "x": 92, "y": 76, "width": 896, "height": 110, "rotation": 0, "corner_radius": 0, "clip": false, "z_index": 1 },
+      "layout": { "direction": "none", "gap": 0, "padding_top": 0, "padding_right": 0, "padding_bottom": 0, "padding_left": 0, "align_main": "start", "align_cross": "start", "sizing_mode": "fixed", "wrap": false },
+      "constraints": { "x": "min", "y": "min", "width": "fixed", "height": "fixed" },
+      "style": { "visible": true, "locked": false, "opacity": 1, "blend_mode": "normal", "fill": "#1e1d1a", "stroke": null, "effects": [], "image_fit": "fill", "image_crop": null, "mask": false },
+      "text": "Offer of the week",
+      "text_style": { "family": "Inter", "postscript": "Inter-Medium", "style": "Medium", "size": 52, "line_height": 100, "line_height_unit": "percent", "letter_spacing": 0, "text_align": "left", "vertical_align": "top", "color": "#1e1d1a" },
+      "text_runs": [],
+      "text_path": null,
+      "image_src": null,
+      "editable": true,
+      "component_instance": null
+    },
+    {
+      "id": "card_1",
+      "parent_id": "root",
+      "children_ids": [],
+      "name": "CARD1",
+      "kind": "rect",
+      "geometry": { "x": 80, "y": 240, "width": 920, "height": 240, "rotation": 0, "corner_radius": 28, "clip": false, "z_index": 2 },
+      "layout": { "direction": "none", "gap": 0, "padding_top": 0, "padding_right": 0, "padding_bottom": 0, "padding_left": 0, "align_main": "start", "align_cross": "start", "sizing_mode": "fixed", "wrap": false },
+      "constraints": { "x": "min", "y": "min", "width": "fixed", "height": "fixed" },
+      "style": { "visible": true, "locked": false, "opacity": 1, "blend_mode": "normal", "fill": "#c6a98f", "stroke": null, "effects": [], "image_fit": "fill", "image_crop": null, "mask": false },
+      "text": null,
+      "text_style": { "family": "Inter", "postscript": "Inter-Regular", "style": "Regular", "size": 42, "line_height": 110, "line_height_unit": "percent", "letter_spacing": 0, "text_align": "left", "vertical_align": "top" },
+      "text_runs": [],
+      "text_path": null,
+      "image_src": null,
+      "editable": false,
+      "component_instance": null
+    },
+    {
+      "id": "card_2",
+      "parent_id": "root",
+      "children_ids": [],
+      "name": "CARD2",
+      "kind": "rect",
+      "geometry": { "x": 80, "y": 520, "width": 920, "height": 240, "rotation": 0, "corner_radius": 28, "clip": false, "z_index": 3 },
+      "layout": { "direction": "none", "gap": 0, "padding_top": 0, "padding_right": 0, "padding_bottom": 0, "padding_left": 0, "align_main": "start", "align_cross": "start", "sizing_mode": "fixed", "wrap": false },
+      "constraints": { "x": "min", "y": "min", "width": "fixed", "height": "fixed" },
+      "style": { "visible": true, "locked": false, "opacity": 1, "blend_mode": "normal", "fill": "#d9bca0", "stroke": null, "effects": [], "image_fit": "fill", "image_crop": null, "mask": false },
+      "text": null,
+      "text_style": { "family": "Inter", "postscript": "Inter-Regular", "style": "Regular", "size": 42, "line_height": 110, "line_height_unit": "percent", "letter_spacing": 0, "text_align": "left", "vertical_align": "top" },
+      "text_runs": [],
+      "text_path": null,
+      "image_src": null,
+      "editable": false,
+      "component_instance": null
+    },
+    {
+      "id": "divider_1",
+      "parent_id": "root",
+      "children_ids": [],
+      "name": "DIVIDER",
+      "kind": "line",
+      "geometry": { "x": 120, "y": 812, "width": 840, "height": 2, "rotation": 0, "corner_radius": 0, "clip": false, "z_index": 4 },
+      "layout": { "direction": "none", "gap": 0, "padding_top": 0, "padding_right": 0, "padding_bottom": 0, "padding_left": 0, "align_main": "start", "align_cross": "start", "sizing_mode": "fixed", "wrap": false },
+      "constraints": { "x": "min", "y": "min", "width": "fixed", "height": "fixed" },
+      "style": { "visible": true, "locked": false, "opacity": 1, "blend_mode": "normal", "fill": "#8e745b", "stroke": null, "effects": [], "image_fit": "fill", "image_crop": null, "mask": false },
+      "text": null,
+      "text_style": { "family": "Inter", "postscript": "Inter-Regular", "style": "Regular", "size": 42, "line_height": 110, "line_height_unit": "percent", "letter_spacing": 0, "text_align": "left", "vertical_align": "top" },
+      "text_runs": [],
+      "text_path": null,
+      "image_src": null,
+      "editable": false,
+      "component_instance": null
+    }
+  ],
+  "bindings": {
+    "text": {
+      "title1": {
+        "node_id": "title_1",
+        "required": true,
+        "max_length": 80,
+        "fit": { "start_size": 52, "min_size": 36, "max_lines": 2, "min_lines": 1, "truncate_mode": "none" },
+        "font": { "family": "Inter", "style": "Medium", "postscript": "Inter-Medium", "size": 52, "line_height": 100, "line_height_unit": "percent", "letter_spacing": 0, "text_align": "left", "vertical_align": "top" },
+        "label": "Title"
+      }
+    },
+    "images_single": {},
+    "images_array": {},
+    "product_frames": null
+  },
+  "dynamic_rules": [],
+  "metadata": {
+    "source": "golden-fixture",
+    "components": { "definitions": [] }
+  }
+}

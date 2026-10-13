@@ -1,0 +1,66 @@
+.DS_Store
+
+# Node / UI
+ui/node_modules/
+ui/dist/
+ui/.env
+ui/.env.*
+!ui/.env.example
+*.tsbuildinfo
+
+# Python / API
+apps/api/.venv/
+apps/api/venv/
+apps/api/__pycache__/
+apps/api/.pytest_cache/
+apps/api/.ruff_cache/
+apps/api/.mypy_cache/
+apps/api/.coverage
+apps/api/coverage.xml
+apps/api/.env.v2
+apps/api/.env.v2.bak*
+apps/api/data/
+
+# Local/runtime state
+.claude/
+.remember/
+.local-runtime/
+tmp/
+ui/test-results/
+*.db
+*.sqlite
+*.sqlite3
+*.log
+*.out
+
+# Docs artifacts
+docs/plan/artefatos/
+docs/plan/visual-baseline/
+*.pyc
+*.bak
+*.bak.*
+launcher.log
+
+# Agent scratch dirs (renders, temp work)
+.agent-assets/
+.agent-docs/
+.agent-renders/
+.agent-work/
+
+# Secrets / local sessions
+cookies.txt
+*.cookies
+
+# Env, planning and data (extra safety)
+.env
+.env.*
+!*.env.example
+!.env.example
+!.env.v2.example
+!.env.local.example
+.pinsela-plan.md
+.venv/
+venv/
+node_modules/
+dist/
+data/

@@ -1,0 +1,113 @@
+/* ============================================================
+   PINSELA BRAND FOUNDATION
+   Single source of truth for the visual identity.
+   Aesthetic: calm, neutral and light — white panels on a soft
+   gray workspace, near-black primary actions, one blue functional
+   accent for selection/focus, Inter type (OFL, shipped locally,
+   zero external deps).
+   All new/refactored surfaces consume --ec-* tokens only.
+   ============================================================ */
+
+/* ---------- UI typeface: Inter (SIL OFL), shipped locally ---------- */
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/google/inter-400.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/google/inter-400i.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  /* ---------- Type ---------- */
+  --ec-font-ui: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --ec-font-display: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --ec-font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+  --ec-text-xs: 11px;
+  --ec-text-sm: 12.5px;
+  --ec-text-md: 14px;
+  --ec-text-lg: 16px;
+  --ec-text-xl: 20px;
+  --ec-text-2xl: 28px;
+  --ec-text-display: clamp(34px, 4.4vw, 56px);
+
+  /* ---------- Neutral light surfaces ---------- */
+  --ec-bg: #f5f5f4;
+  --ec-bg-raised: #fafafa;
+  --ec-surface: #ffffff;
+  --ec-surface-2: #f5f5f5;
+  --ec-overlay: rgba(23, 23, 23, 0.4);
+  --ec-border: #e5e5e5;
+  --ec-border-strong: #d4d4d4;
+  --ec-text: #171717;
+  --ec-text-muted: #525252;
+  --ec-text-faint: #666666;
+  --ec-text-disabled: #a3a3a3;
+  --ec-hover: #f0f0f0;
+
+  /* ---------- Primary action: near-black ---------- */
+  --ec-primary: #171717;
+  --ec-primary-hover: #262626;
+  --ec-primary-ink: #ffffff;
+
+  /* ---------- The one functional accent (selection, focus, active): blue ---------- */
+  --ec-accent: #2563eb;
+  --ec-accent-hover: #1d4ed8;
+  --ec-accent-pressed: #1e40af;
+  --ec-accent-ink: #ffffff;          /* text on accent */
+  --ec-accent-text: #1d4ed8;         /* accent used as text/icon on light surfaces */
+  --ec-accent-soft: rgba(37, 99, 235, 0.08);
+  --ec-accent-border: rgba(37, 99, 235, 0.4);
+  --ec-focus-ring: 0 0 0 2px rgba(37, 99, 235, 0.4);
+
+  /* ---------- Status ---------- */
+  --ec-danger: #dc2626;
+  --ec-danger-soft: rgba(220, 38, 38, 0.08);
+  --ec-warn: #b45309;
+  --ec-warn-soft: rgba(180, 83, 9, 0.1);
+
+  /* ---------- Geometry ---------- */
+  --ec-radius-sm: 8px;
+  --ec-radius-md: 12px;
+  --ec-radius-lg: 16px;
+  --ec-radius-xl: 22px;
+  --ec-radius-pill: 999px;
+
+  /* ---------- Elevation (soft, low) ---------- */
+  --ec-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --ec-shadow-md: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.05);
+  --ec-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.05);
+  --ec-shadow-pop: 0 12px 32px rgba(0, 0, 0, 0.14), 0 0 0 1px rgba(0, 0, 0, 0.05);
+
+  /* ---------- Motion ---------- */
+  --ec-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ec-fast: 130ms;
+  --ec-base: 210ms;
+  --ec-slow: 360ms;
+}
+
+/* ---------- Brand atoms ---------- */
+.ec-wordmark {
+  font-family: var(--ec-font-display);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.ec-kicker {
+  font-family: var(--ec-font-ui);
+  font-size: var(--ec-text-xs);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ec-text-faint);
+}
+
+::selection {
+  background: var(--ec-accent-soft);
+}
